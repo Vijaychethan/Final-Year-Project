@@ -170,9 +170,9 @@ def capture_image(frame, blueprint_img):
     class_name = "Ulcers"  # Specify the class you want to segment
     segmented_image = Predict(pil_image, class_name)
     result=Image.fromarray(segmented_image, mode='RGB')
-    # result=cv2.addWeighted(segmented_image,1,blueprint_img,0,0)
+    dest_xor = cv2.bitwise_xor(blueprint_img, segmented_image, mask = None)
     # Display the segmented image using Streamlit
-    st.image(result, caption=f'Segmented ', use_column_width=True)
+    st.image(dest_xor, caption=f'Segmented ', use_column_width=True)
 
 
 
@@ -180,4 +180,5 @@ def capture_image(frame, blueprint_img):
 if __name__ == "__main__":
     main()
 
-# done till foot overlapping
+
+# done till foot overlapping and masked output
